@@ -70,8 +70,10 @@ export default {
         }).then(res => {
           console.log(res.data)
           // 解构赋值
-          const { meta } = res.data
+          const { meta, data } = res.data
           if (meta.status === 200) {
+            // 存储token到本地
+            localStorage.setItem('mytoken1', data.token)
             // this.$message('这是一条消息提示')  // 直接提示
             // this.$message.success(meta.msg)  // 指定类型提示
             // 配置完整对象

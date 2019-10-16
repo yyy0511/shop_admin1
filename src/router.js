@@ -5,7 +5,13 @@ import Index from './components/Index.vue'
 
 Vue.use(Router)
 
-export default new Router({
+// 全局前置守卫
+// const router = new VueRouter({ ... })
+
+// router.beforeEach((to, from, next) => {
+// })
+
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -22,3 +28,15 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  console.log(to)
+  const token = localStorage.getItem('mytoken1')
+  if (to.path === '/login' || token) {
+    next()
+  } else {
+    next('/login')
+  }
+})
+
+export default router
